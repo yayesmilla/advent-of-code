@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "allowJs": true,
+    "module": "es2022",
+    "experimentalDecorators": true,
+    "include": ["src/**/*.ts", "inputs/**/*.ts", "index.ts"],
+    "paths": {
+      "@inputs/*": ["./inputs/*"]
+    }
+  }
+}
