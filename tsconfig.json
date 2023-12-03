@@ -2,11 +2,20 @@
   "compilerOptions": {
     "target": "es2022",
     "allowJs": true,
-    "module": "es2022",
+    "outDir": "dist",
+    "rootDir": "src",
+    "module": "commonjs",
     "experimentalDecorators": true,
-    "include": ["src/**/*.ts", "inputs/**/*.ts", "index.ts"],
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "esModuleInterop": true,
     "paths": {
-      "@inputs/*": ["./inputs/*"]
+      "@aoc2023/*": ["./src/2023/*"],
+      "@utils/*": ["./src/utils/*"]
     }
+  },
+  "include": ["src/**/*.ts"],
+  "ts-node": {
+    "esm": true
   }
 }
