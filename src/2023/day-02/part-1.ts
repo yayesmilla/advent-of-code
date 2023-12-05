@@ -1,9 +1,8 @@
-import { convertToArray } from '../../utils/utils';
+import { convertToArray, readInput } from '../../utils/utils';
 import * as log from '../../utils/logger';
-import { input } from './input';
 
 function solve() {
-    const games = convertToArray(input, '||');
+    const games = readInput(__dirname + '/input.txt');
 
     const cubes = {
         'red': 12, 'green': 13, 'blue': 14
@@ -14,6 +13,9 @@ function solve() {
 
     games.forEach((game, gameIndex) => {
         gameIteration = gameIndex + 1;
+
+        // strip unnecessary stuff
+        game = game.replace(/Game\s[0-9]{1,3}:\s/, '');
         const sets = convertToArray(game, '; ');
 
         const filteredSets = sets.filter(set => {
@@ -22,19 +24,18 @@ function solve() {
                 const [resVal, resColor] = round.split(' ');
                 return cubes[resColor] >= resVal;
             });
-        
+
             return rounds.length === filteredRounds.length;
         });
       if ( sets.length === filteredSets.length ) {
             gameSum += gameIteration;
-            log.green(`${gameIteration}: ${game} -> POSSIBLE`);
+            log.green(`Game ${gameIteration}: ${game} -> POSSIBLE`);
         } else {
-            log.red(`${gameIteration}: ${game} -> NOT-POSSIBLE`);
+            log.red(`Game ${gameIteration}: ${game} -> NOT-POSSIBLE`);
         }
     });
-    
-    log.def('-----------------');
-    log.def(`Game Sum: ${gameSum}`);
+
+    log.white(`Game Sum: ${gameSum}`);
 }
 
 export { solve };

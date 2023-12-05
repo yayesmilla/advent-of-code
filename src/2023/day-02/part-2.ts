@@ -1,9 +1,8 @@
-import { convertToArray, getTotalProduct, getTotalSum } from '../../utils/utils';
+import { convertToArray, getProduct, getSum, readInput } from '../../utils/utils';
 import * as log from '../../utils/logger';
-import { input } from './input';
 
 function solve() {
-    const games = convertToArray(input, '||');
+    const games = readInput(__dirname + '/input.txt');
 
     let sets, rounds;
     let resVal, resColor;
@@ -13,6 +12,9 @@ function solve() {
     const powers = games.map((game) => {
         let cubesMax = { blue: 0, red: 0, green: 0 };
 
+        // strip unnecessary stuff
+        game = game.replace(/Game\s[0-9]{1,3}:\s/, '');
+
         sets = convertToArray(game, '; ');
         sets.forEach(set => {
             rounds = convertToArray(set, ', ');
@@ -20,7 +22,7 @@ function solve() {
 
                 [resVal, resColor] = convertToArray(round, ' ');
                 parseVal = parseInt(resVal);
-        
+
                 if (cubesMax[resColor] === 0) {
                     cubesMax[resColor] = parseVal;
                 } else {
@@ -29,14 +31,13 @@ function solve() {
             }); // end round
         }); // end set
 
-        power = getTotalProduct(Object.values(cubesMax));
+        power = getProduct(Object.values(cubesMax));
 
         return power;
 
     }); // end game
-    
-    log.def('-----------------');
-    log.def(`Game Sum: ` + getTotalSum(powers));
+
+    log.white(`Game Sum: ` + getSum(powers));
 }
 
 export { solve };

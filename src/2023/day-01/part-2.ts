@@ -1,8 +1,7 @@
-import { convertToArray } from '../../utils/utils';
-import { input } from './input';
+import { readInput } from '../../utils/utils';
 
 function solve() {
-    const inputs = convertToArray(input, ',');
+    const inputs = readInput(__dirname + '/input.txt');
     let parsedNum = 0, sum = 0;
 
     inputs.forEach((input) => {
