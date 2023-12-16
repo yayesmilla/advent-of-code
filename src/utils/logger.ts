@@ -14,4 +14,4 @@ function blue(text) { // white
     console.log(`\x1b[46m\x1b[30m${text} \x1b[0m`);
 }
 
-export { green, red, white };
+export { green, red, white, blue };
